@@ -23,16 +23,18 @@ while True:
         window['sheet'].update('')
 
     elif event == 'Continuar':
-        pass
+        if len(new_sheets) > 0:
+            for new_sheet in new_sheets:
+                if new_sheet == '': continue
+                
+                workbook.create_sheet(new_sheet)
+        else:
+            print('⚠VOCÊ NÃO INSERIU NENHUMA PÁGINA NA PLANILHA. ', end='')
+            print('INSIRA A(S) PÁGINA(S) DESEJADA(S) E TENTE NOVAMENTE⚠')
 
-    #new_sheet_name = input('Digite o nome da página: ')
-    #workbook.create_sheet(new_sheet_name)
-
-    #add_another_sheet = input('Criar mais uma página nesta planilha?(s/n): ')
-    #if add_another_sheet == 'n': break
 
 
-sheet_choice = input("Digite o nome da página a ser manipulada: ")
+""" sheet_choice = input("Digite o nome da página a ser manipulada: ")
 current_sheet = workbook[sheet_choice]
 
 new_fields = []
@@ -65,6 +67,6 @@ if add_data_in_sheet == 's':
 workbook_name = input("Digite o nome da planilha a ser salva: ").strip()
 workbook.save(f'{workbook_name}.xlsx')
 print("Planilha criada com sucesso.")
-
+ """
 
 

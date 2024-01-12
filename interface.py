@@ -18,7 +18,7 @@ class AddSheet():
 
         layout_saida = [
             [sg.Text()],
-            [sg.Output(size=(20,5))]
+            [sg.Output(size=(50,5))]
         ]
 
         layout_principal = [
