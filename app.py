@@ -34,7 +34,7 @@ if add_data_in_sheet == 's':
     available_sheets = workbook.sheetnames
     print(f'As páginas disponíveis são: {available_sheets}')
 
-    sheet_choice = input("Em qual página devemo adicionar dados? ")
+    sheet_choice = input("Em qual página devemos adicionar dados? ")
     current_sheet = workbook[sheet_choice]
 
     while True:
