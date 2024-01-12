@@ -5,36 +5,38 @@ from interface import *
 
 workbook = openpyxl.Workbook()
 del workbook['Sheet']
-
-window = sg.Window('Teste', layout=AddSheet.layout_principal)
 new_sheets = []
 
+adiciona_sheets_planilha_, escolhe_sheet_ = adiciona_sheets_planilha(), None
+
 while True:
-    event, values = window.read()
+    window, event, values = sg.read_all_windows()
 
     if event == sg.WINDOW_CLOSED: break
 
-    elif event == 'Adicionar':
-        new_sheets.append(values['sheet'])
-        print(values['sheet'])
-        window['sheet'].update('')
+    if window == adiciona_sheets_planilha_:
 
-    elif event == 'Limpar':
-        window['sheet'].update('')
+        if event == 'Adicionar':
+            if values['sheet'] != '':
+                window['Continuar'].update(disabled=False)
+                print(values['sheet'])
+                new_sheets.append(values['sheet'])
+                window['sheet'].update('')
 
-    elif event == 'Continuar':
-        if len(new_sheets) > 0:
+        elif event == 'Limpar':
+            window['sheet'].update('')
+
+        elif event == 'Continuar':
             for new_sheet in new_sheets:
-                if new_sheet == '': continue
-                
                 workbook.create_sheet(new_sheet)
-        else:
-            print('⚠VOCÊ NÃO INSERIU NENHUMA PÁGINA NA PLANILHA. ', end='')
-            print('INSIRA A(S) PÁGINA(S) DESEJADA(S) E TENTE NOVAMENTE⚠')
+            escolhe_sheet_ = escolhe_sheet(workbook.sheetnames)
+            
+
+    elif window == escolhe_sheet_:
+        pass
 
 
-
-sheet_choice = input("Digite o nome da página a ser manipulada: ")
+""" sheet_choice = input("Digite o nome da página a ser manipulada: ")
 current_sheet = workbook[sheet_choice]
 
 new_fields = []
@@ -67,3 +69,4 @@ if add_data_in_sheet == 's':
 workbook_name = input("Digite o nome da planilha a ser salva: ").strip()
 workbook.save(f'{workbook_name}.xlsx')
 print("Planilha criada com sucesso.")
+ """
