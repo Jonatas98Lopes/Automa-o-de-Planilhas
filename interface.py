@@ -56,5 +56,29 @@ def escolhe_sheet(sheets) -> sg.Window:
     layout_principal.append([sg.Button('Continuar')])
     return sg.Window('Escolha a página da planilha', layout=layout_principal, finalize=True)
 
-#window = sg.Window('Teste', layout=SelectPage.retorna_layout_principal(['camisas','sapatos','tesouras']))
-#window.read()
+def adiciona_colunas(sheet) -> sg.Window:
+    sg.theme('DarkGreen5') 
+
+    layout_dados_entrada = [
+        [sg.Text(f'Digite o nome para uma coluna no cabeçalho da página: {sheet}')],
+        [sg.Input(key='column_name', size=(26,1))],
+        [sg.Button('Adicionar',size=(10,1)), sg.Button('Limpar', size=(10,1))],
+        [sg.Button('Continuar', size=(22,1), disabled=True)]
+    ]
+
+    layout_saida = [
+        [sg.Text()],
+        [sg.Output(size=(50,5))]
+    ]
+
+    layout_principal = [
+        [
+            sg.Column(layout_dados_entrada), 
+            sg.Column(layout_saida), 
+        ]
+    ]
+    return sg.Window('Adicione a(s) página(s) na planilha:', 
+        layout=layout_principal, finalize=True)
+
+""" window = adiciona_colunas()
+window.read() """

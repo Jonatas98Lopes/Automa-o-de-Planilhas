@@ -5,9 +5,13 @@ from interface import *
 
 workbook = openpyxl.Workbook()
 del workbook['Sheet']
+
 new_sheets = []
+new_columns = []
+
 
 adiciona_sheets_planilha_, escolhe_sheet_ = adiciona_sheets_planilha(), None
+adiciona_colunas_ = None
 
 while True:
     window, event, values = sg.read_all_windows()
@@ -29,11 +33,33 @@ while True:
         elif event == 'Continuar':
             for new_sheet in new_sheets:
                 workbook.create_sheet(new_sheet)
+            adiciona_sheets_planilha_.close()
             escolhe_sheet_ = escolhe_sheet(workbook.sheetnames)
             
 
     elif window == escolhe_sheet_:
-        pass
+        for key, value in values.items():
+            if value:
+                name_current_sheet = key
+                current_sheet = workbook[key]
+        escolhe_sheet_.close()
+        adiciona_colunas_ = adiciona_colunas(name_current_sheet)
+
+    elif window == adiciona_colunas_:
+
+        if event == 'Adicionar':
+            if values['column_name'] != '':
+                window['Continuar'].update(disabled=False)
+                print(values['column_name'])
+                new_columns.append(values['column_name'])
+                window['column_name'].update('')
+
+        elif event == 'Limpar':
+                window['column_name'].update('')
+        
+        elif event == 'Continuar':
+            pass
+
 
 
 """ sheet_choice = input("Digite o nome da página a ser manipulada: ")
