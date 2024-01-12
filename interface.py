@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 
 
 class AddSheet():
+        
         sg.theme('DarkGreen5') 
 
         layout_descricao = [
@@ -31,9 +32,24 @@ class AddSheet():
     
 
 
+class SelectPage():
+    
+    def retorna_layout_principal(sheets):
+        sg.theme('DarkGreen5') 
+
+        layout_principal = [
+            [sg.Text('Selecione o nome da página a ser manipulada:')]
+        ]
+
+        sheet_options = []
+        for sheet in sheets:
+            sheet_options.append(
+                sg.Radio(sheet, group_id='sheet_selection', key=f'{sheet}'))
+
+        layout_principal.append(sheet_options)
+        layout_principal.append([sg.Button('Continuar')])
+        return layout_principal
 
 
-
-
-
-
+window = sg.Window('Teste', layout=SelectPage.retorna_layout_principal(['camisas','sapatos','tesouras']))
+window.read()

@@ -34,7 +34,7 @@ while True:
 
 
 
-""" sheet_choice = input("Digite o nome da página a ser manipulada: ")
+sheet_choice = input("Digite o nome da página a ser manipulada: ")
 current_sheet = workbook[sheet_choice]
 
 new_fields = []
@@ -67,6 +67,3 @@ if add_data_in_sheet == 's':
 workbook_name = input("Digite o nome da planilha a ser salva: ").strip()
 workbook.save(f'{workbook_name}.xlsx')
 print("Planilha criada com sucesso.")
- """
-
-
