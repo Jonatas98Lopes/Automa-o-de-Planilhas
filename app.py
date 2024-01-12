@@ -28,5 +28,24 @@ while True:
 
 current_sheet.append(new_fields)
 
+add_data_in_sheet = input("Adicionar dados a essa planilha?(s/n): ")
+if add_data_in_sheet == 's':
+
+    available_sheets = workbook.sheetnames
+    print(f'As páginas disponíveis são: {available_sheets}')
+
+    sheet_choice = input("Em qual página devemo adicionar dados? ")
+    current_sheet = workbook[sheet_choice]
+
+    while True:
+        data = input("Digite os dados a serem adicionados a uma nova linha, separadas por vírgula: ").strip()
+        current_sheet.append(data.split(','))
+
+        add_new_data_line = input("Adicionar uma nova linha?(s/n): ")
+        if add_new_data_line == 'n': break
+
+
+
+
 # Apenas para teste da planilha
 workbook.save('dados.xlsx')
