@@ -43,9 +43,10 @@ if add_data_in_sheet == 's':
 
         add_new_data_line = input("Adicionar uma nova linha?(s/n): ")
         if add_new_data_line == 'n': break
+    
+    workbook_name = input("Digite o nome da planilha a ser salva: ").strip()
+    workbook.save(f'{workbook_name}.xlsx')
+    print("Planilha criada com sucesso.")
 
 
 
-
-# Apenas para teste da planilha
-workbook.save('dados.xlsx')
