@@ -1,17 +1,35 @@
 import openpyxl
+from interface import *
 
-print('Bem-vindo ao gerador de planilhas!')
-print('Para começar, vamos criar uma nova página dentro de uma planilha.')
+
 
 workbook = openpyxl.Workbook()
 del workbook['Sheet']
 
-while True:
-    new_sheet_name = input('Digite o nome da página: ')
-    workbook.create_sheet(new_sheet_name)
+window = sg.Window('Teste', layout=AddSheet.layout_principal)
+new_sheets = []
 
-    add_another_sheet = input('Criar mais uma página nesta planilha?(s/n): ')
-    if add_another_sheet == 'n': break
+while True:
+    event, values = window.read()
+
+    if event == sg.WINDOW_CLOSED: break
+
+    elif event == 'Adicionar':
+        new_sheets.append(values['sheet'])
+        print(values['sheet'])
+        window['sheet'].update('')
+
+    elif event == 'Limpar':
+        window['sheet'].update('')
+
+    elif event == 'Continuar':
+        pass
+
+    #new_sheet_name = input('Digite o nome da página: ')
+    #workbook.create_sheet(new_sheet_name)
+
+    #add_another_sheet = input('Criar mais uma página nesta planilha?(s/n): ')
+    #if add_another_sheet == 'n': break
 
 
 sheet_choice = input("Digite o nome da página a ser manipulada: ")

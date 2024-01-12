@@ -33,5 +33,7 @@ class AddSheet():
 
 
 
-window = sg.Window('Teste', layout=AddSheet.layout_principal)
-window.read()
+
+
+
+
