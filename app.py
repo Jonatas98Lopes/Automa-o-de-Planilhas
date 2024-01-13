@@ -1,8 +1,7 @@
 import openpyxl
+import os
 from interface import *
 
-def tem_heading_sheet(sheet):
-    return sheet['A1'].value is not None 
 
 workbook = openpyxl.Workbook()
 del workbook['Sheet']
@@ -123,44 +122,10 @@ while True:
                     .update('⚠VOCÊ DIGITOU APENAS NÚMEROS. NOMES DE ARQUIVOS PRECISAM CONTER LETRAS⚠')
             else:
                 file_name = values['file_name'] + values['extension']
-                workbook.save(file_name)
+                workbook.save(os.getcwd() + os.sep + file_name)
                 window['Finalizar'].update(disabled=False)
         elif event == 'Finalizar':
             break
 
 
 
-""" sheet_choice = input("Digite o nome da página a ser manipulada: ")
-current_sheet = workbook[sheet_choice]
-
-new_fields = []
-while True:
-    new_field = input('Digite um nome de uma coluna para o cabeçalho: ')
-    new_fields.append(new_field)
-
-
-    add_new_field = input('Adicionar mais uma coluna?(s/n): ')
-    if add_new_field == 'n': break
-
-current_sheet.append(new_fields)
-
-add_data_in_sheet = input("Adicionar dados a essa planilha?(s/n): ")
-if add_data_in_sheet == 's':
-
-    available_sheets = workbook.sheetnames
-    print(f'As páginas disponíveis são: {available_sheets}')
-
-    sheet_choice = input("Em qual página devemos adicionar dados? ")
-    current_sheet = workbook[sheet_choice]
-
-    while True:
-        data = input("Digite os dados a serem adicionados a uma nova linha, separadas por vírgula: ").strip()
-        current_sheet.append(data.split(','))
-
-        add_new_data_line = input("Adicionar uma nova linha?(s/n): ")
-        if add_new_data_line == 'n': break
-    
-workbook_name = input("Digite o nome da planilha a ser salva: ").strip()
-workbook.save(f'{workbook_name}.xlsx')
-print("Planilha criada com sucesso.")
- """
