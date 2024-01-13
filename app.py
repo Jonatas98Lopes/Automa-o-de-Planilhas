@@ -13,7 +13,7 @@ new_columns = []
 
 adiciona_sheets_planilha_, escolhe_sheet_ = adiciona_sheets_planilha(), None
 adiciona_colunas_, escolher_adicionar_dados_ = None, None
-salvar_arquivo_ = None
+salvar_arquivo_, escolher_pagina_adicionar_dados_ = None, None
 
 while True:
     window, event, values = sg.read_all_windows()
@@ -65,13 +65,17 @@ while True:
             escolher_adicionar_dados_ = escolher_adicionar_dados()
 
     elif window == escolher_adicionar_dados_:
+        escolher_adicionar_dados_.close()
         if event == 'Continuar':
             if values['sim']:
-                pass
+                escolher_pagina_adicionar_dados_ = escolher_pagina_adicionar_dados(
+                    workbook.sheetnames)
             else: 
                 salvar_arquivo_ = salvar_arquivo()
                 
-            escolher_adicionar_dados_.close()
+    elif window == escolher_pagina_adicionar_dados_:
+        if event == 'Continuar':
+            escolher_pagina_adicionar_dados_.close()
 
     elif window == salvar_arquivo_:
         if event == 'Salvar':
