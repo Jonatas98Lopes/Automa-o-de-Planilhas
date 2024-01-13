@@ -10,8 +10,9 @@ new_sheets = []
 new_columns = []
 
 
+
 adiciona_sheets_planilha_, escolhe_sheet_ = adiciona_sheets_planilha(), None
-adiciona_colunas_ = None
+adiciona_colunas_, escolher_adicionar_dados_ = None, None
 
 while True:
     window, event, values = sg.read_all_windows()
@@ -58,7 +59,16 @@ while True:
                 window['column_name'].update('')
         
         elif event == 'Continuar':
-            pass
+            current_sheet.append(new_columns)
+            adiciona_colunas_.close()
+            escolher_adicionar_dados_ = escolher_adicionar_dados()
+
+    elif window == escolher_adicionar_dados_:
+        if event == 'Continuar':
+            if values['sim']:
+                pass
+            
+
 
 
 

@@ -1,6 +1,5 @@
 import PySimpleGUI as sg 
-
-
+import openpyxl
 
 
 def adiciona_sheets_planilha() -> sg.Window:
@@ -56,6 +55,7 @@ def escolhe_sheet(sheets) -> sg.Window:
     layout_principal.append([sg.Button('Continuar')])
     return sg.Window('Escolha a página da planilha', layout=layout_principal, finalize=True)
 
+
 def adiciona_colunas(sheet) -> sg.Window:
     sg.theme('DarkGreen5') 
 
@@ -77,8 +77,44 @@ def adiciona_colunas(sheet) -> sg.Window:
             sg.Column(layout_saida), 
         ]
     ]
-    return sg.Window('Adicione a(s) página(s) na planilha:', 
+    return sg.Window('Adicione a(s) coluna(s) na página:', 
         layout=layout_principal, finalize=True)
 
-""" window = adiciona_colunas()
+
+def escolher_adicionar_dados() -> sg.Window:
+    sg.theme('DarkGreen5') 
+
+    layout = [
+        [sg.Text('Adicionar dados a essa planilha?')],
+        [
+            sg.Radio('Sim', group_id='insert_data', default=True, key='sim'),
+            sg.Radio('Não', group_id='insert_data', key='nao'),
+        ],
+        [sg.Button('Continuar')]
+    ]
+
+    return sg.Window('Adicionar dados?', layout=layout, finalize=True)
+
+
+def salvar_arquivo() -> sg.Window:
+    sg.theme('DarkGreen5') 
+    
+    layout = [
+        [sg.Text('Digite o nome da planilha a ser salva:')],
+        [
+            sg.Input(key='file_name', size=(26,1),), 
+            sg.Input('.xlsx', disabled=True, size=(5,1),)
+        ],
+        [sg.Text(key='warning_file_name', text_color='red')],
+        [
+            sg.Button('Salvar', disabled=True, size=(7,1)), 
+            sg.Button('Finalizar', disabled=True, size=(10,1))
+            ]
+
+    ]
+
+    return sg.Window('Salvar arquivo de planilha:', layout=layout)
+
+
+""" window = salvar_arquivo()
 window.read() """
