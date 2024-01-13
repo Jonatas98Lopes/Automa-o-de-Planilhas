@@ -116,8 +116,25 @@ def salvar_arquivo() -> sg.Window:
     return sg.Window('Salvar arquivo de planilha:', layout=layout, finalize=True)
 
 
-def escolher_pagina_adicionar_dados(sheets):
-    pass
+def escolher_pagina_adicionar_dados(sheets: list) -> sg.Window:
+    sg.theme('DarkGreen5') 
 
+    layout = [
+        [sg.Text('Em qual página devemos adicionar dados?')]
+    ]
+
+    radio_buttons = []
+    for index, sheet in enumerate(sheets):
+        if index == 0:
+            radio_buttons.append(sg.Radio(
+                sheet, default=True, group_id='sheet_choice', key=f"{sheet}"))
+        else:
+            radio_buttons.append(sg.Radio(
+                sheet, group_id='sheet_choice', key=f"{sheet}"))
+            
+    layout.append(radio_buttons)
+    layout.append([sg.Button('Continuar')])
+            
+    return sg.Window('Escolher página:', layout=layout, finalize=True)
 
 
