@@ -13,6 +13,7 @@ new_columns = []
 
 adiciona_sheets_planilha_, escolhe_sheet_ = adiciona_sheets_planilha(), None
 adiciona_colunas_, escolher_adicionar_dados_ = None, None
+salvar_arquivo_ = None
 
 while True:
     window, event, values = sg.read_all_windows()
@@ -67,8 +68,24 @@ while True:
         if event == 'Continuar':
             if values['sim']:
                 pass
-            
+            else: 
+                salvar_arquivo_ = salvar_arquivo()
+                
+            escolher_adicionar_dados_.close()
 
+    elif window == salvar_arquivo_:
+        if event == 'Salvar':
+            window['Salvar'].update(disabled=True)
+            if values['file_name'].isdigit():
+                window['file_name'].update('')
+                window['warning_file_name']\
+                    .update('⚠VOCÊ DIGITOU APENAS NÚMEROS. NOMES DE ARQUIVOS PRECISAM CONTER LETRAS⚠')
+            else:
+                file_name = values['file_name'] + values['extension']
+                workbook.save(file_name)
+                window['Finalizar'].update(disabled=False)
+        elif event == 'Finalizar':
+            break
 
 
 

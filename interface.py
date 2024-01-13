@@ -103,17 +103,17 @@ def salvar_arquivo() -> sg.Window:
         [sg.Text('Digite o nome da planilha a ser salva:')],
         [
             sg.Input(key='file_name', size=(26,1),), 
-            sg.Input('.xlsx', disabled=True, size=(5,1),)
+            sg.Input('.xlsx', disabled=True, size=(5,1), key='extension')
         ],
-        [sg.Text(key='warning_file_name', text_color='red')],
+        [sg.Text(key='warning_file_name', text_color='white')],
         [
-            sg.Button('Salvar', disabled=True, size=(7,1)), 
+            sg.Button('Salvar', size=(7,1)), 
             sg.Button('Finalizar', disabled=True, size=(10,1))
-            ]
+        ]
 
     ]
 
-    return sg.Window('Salvar arquivo de planilha:', layout=layout)
+    return sg.Window('Salvar arquivo de planilha:', layout=layout, finalize=True)
 
 
 """ window = salvar_arquivo()
