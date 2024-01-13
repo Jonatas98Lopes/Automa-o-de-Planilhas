@@ -1,7 +1,8 @@
 import openpyxl
 from interface import *
 
-
+def tem_heading_sheet(sheet):
+    return sheet['A1'].value is not None 
 
 workbook = openpyxl.Workbook()
 del workbook['Sheet']
@@ -76,6 +77,13 @@ while True:
     elif window == escolher_pagina_adicionar_dados_:
         if event == 'Continuar':
             escolher_pagina_adicionar_dados_.close()
+            for key, value in values.items():
+                if value:
+                    current_sheet = workbook[key]
+                    break
+            
+                    
+
 
     elif window == salvar_arquivo_:
         if event == 'Salvar':

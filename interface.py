@@ -133,8 +133,42 @@ def escolher_pagina_adicionar_dados(sheets: list) -> sg.Window:
                 sheet, group_id='sheet_choice', key=f"{sheet}"))
             
     layout.append(radio_buttons)
-    layout.append([sg.Button('Continuar')])
+    layout.append([sg.Text(key='no_heading', text_color='white'), sg.Button('Continuar')])
             
     return sg.Window('Escolher página:', layout=layout, finalize=True)
 
 
+def insere_dados_sheet():
+    sg.theme('DarkGreen5') 
+
+    layout_dados_entrada = [
+        [sg.Text('Digite APENAS um dado por vez abaixo:')],
+        [
+            sg.Input(key='data', size=(28,1)),
+            sg.Text('Adicione a linha de dados clicando abaixo:',)
+        ],
+        [
+            sg.Button('Adicionar dado',size=(12,1)), 
+            sg.Button('Limpar', size=(10,1)),
+            sg.Button('Enviar linha',  size=(30,1))
+        ],
+        [sg.Button('Continuar', size=(24,1), disabled=True)]
+    
+    ]
+    layout_saida = [
+        [sg.Text()],
+        [sg.Output(size=(40,5))]
+    ]
+
+    layout_principal = [
+        [
+            sg.Column(layout_dados_entrada), 
+            sg.Column(layout_saida), 
+        ]
+    ]
+    
+    return sg.Window('Adicione dados à página:', layout=layout_principal, finalize=True)
+
+
+window = insere_dados_sheet()
+window.read()
