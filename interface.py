@@ -116,5 +116,8 @@ def salvar_arquivo() -> sg.Window:
     return sg.Window('Salvar arquivo de planilha:', layout=layout, finalize=True)
 
 
-""" window = salvar_arquivo()
-window.read() """
+def escolher_pagina_adicionar_dados(sheets):
+    pass
+
+
+
