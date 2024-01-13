@@ -170,5 +170,3 @@ def insere_dados_sheet():
     return sg.Window('Adicione dados à página:', layout=layout_principal, finalize=True)
 
 
-window = insere_dados_sheet()
-window.read()

@@ -9,12 +9,14 @@ del workbook['Sheet']
 
 new_sheets = []
 new_columns = []
+new_data = []
 
 
 
 adiciona_sheets_planilha_, escolhe_sheet_ = adiciona_sheets_planilha(), None
 adiciona_colunas_, escolher_adicionar_dados_ = None, None
 salvar_arquivo_, escolher_pagina_adicionar_dados_ = None, None
+insere_dados_sheet_ = None
 
 while True:
     window, event, values = sg.read_all_windows()
@@ -24,7 +26,8 @@ while True:
     if window == adiciona_sheets_planilha_:
 
         if event == 'Adicionar':
-            if values['sheet'] != '':
+            sheet = values['sheet']
+            if not sheet.isspace() and sheet != '':
                 window['Continuar'].update(disabled=False)
                 print(values['sheet'])
                 new_sheets.append(values['sheet'])
@@ -51,7 +54,8 @@ while True:
     elif window == adiciona_colunas_:
 
         if event == 'Adicionar':
-            if values['column_name'] != '':
+            column = values['column_name']
+            if not column.isspace() and column != '':
                 window['Continuar'].update(disabled=False)
                 print(values['column_name'])
                 new_columns.append(values['column_name'])
@@ -81,9 +85,34 @@ while True:
                 if value:
                     current_sheet = workbook[key]
                     break
-            
+            insere_dados_sheet_ = insere_dados_sheet()
                     
+    elif window == insere_dados_sheet_:
 
+        if event == 'Adicionar dado':
+            dado = values['data'] 
+            if not dado.isspace() and dado != '':
+                new_data.append(dado)
+                print(f'{dado},', end=' ')
+                window['data'].update('')
+                window['Continuar'].update(disabled=False)
+
+        elif event == 'Limpar': 
+            window['data'].update('')
+
+        elif event == 'Enviar linha': 
+            if len(new_data) > 0:
+                current_sheet.append(new_data)
+                new_data.clear()
+                print()
+                print(30 * '=')
+                print('LINHA ADICIONADA')
+                print(30 * '=')
+
+
+        elif event == 'Continuar': 
+            insere_dados_sheet_.close()
+            salvar_arquivo_ = salvar_arquivo()
 
     elif window == salvar_arquivo_:
         if event == 'Salvar':
